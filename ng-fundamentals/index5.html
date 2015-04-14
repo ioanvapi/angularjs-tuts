@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+
+<body ng-app="demoApp">
+
+<div ng-controller="SimpleController">
+
+    Name:
+    <br/>
+    <input type="text" ng-model="name" />
+    <br/>
+
+    <ul>
+        <li ng-repeat="cust in customers | filter:name">
+            {{ cust.name }} - {{ cust.city}}
+        </li>
+    </ul>
+
+</div>
+
+<script src="js/angular.min.js"></script>
+<script>
+    var demoApp = angular.module('demoApp', []);
+    var controllers = {};
+
+    controllers.SimpleController = function ($scope) {
+        $scope.customers = [
+            {name: 'John Smith', city: 'New York'},
+            {name: 'John Doe', city: 'Phoenix'},
+            {name: 'Jane Doe', city: 'Las Vegas'},
+            {name: 'Bob Dylan', city: 'Hollywood'}
+        ];
+    };
+
+    controllers.MyController = function() {
+        // do smth
+    };
+
+    // this way you can add multiple controllers to the same module
+    demoApp.controller(controllers)
+
+</script>
+
+</body>
+</html>
