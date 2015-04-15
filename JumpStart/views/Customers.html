@@ -1,0 +1,33 @@
+<h2>{{ appSettings.title }}</h2>
+
+Filter:
+<input type="text" ng-model="customerFilter.name"/>
+
+<br/>
+<br/>
+
+<table class="table table-striped">
+    <tr>
+        <th>Name</th>
+        <th>City</th>
+        <th>Order Total</th>
+        <th>Joined</th>
+        <th>&nbsp;</th>
+    </tr>
+
+    <tr ng-repeat="person in customers | filter:customerFilter.name | orderBy: 'name'">
+        <td>{{ person.name }}</td>
+        <td>{{ person.city }}</td>
+        <td>{{ person.orderTotal | currency }}</td>
+        <td>{{ person.joined | date }}</td>
+        <td><a href="#/orders/{{ person.id }}">View Orders</a> </td>
+        <td class="center"><span class="glyphicon glyphicon-remove" ng-click="deleteCustomer(person.id)"></span></td>
+    </tr>
+</table>
+
+<br/>
+<span>Total Customers: {{ customers.length }}</span>
+<br/>
+<br/>
+
+<footer>Version: {{ appSettings.version }}</footer>
