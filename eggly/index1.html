@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script src="lib/angular.min.js"></script>
+</head>
+
+<body>
+
+<div ng-app="SimpleApp">
+    Filter: <input type="text" ng-model="filter.name"/>
+    <br/>
+
+    <div class="container" ng-controller="SimpleController1">
+        <ul>
+            <li ng-repeat="person in persons | filter:filter.name | orderBy:person">
+                {{ person }}
+            </li>
+        </ul>
+    </div>
+
+    <div class="container" ng-controller="SimpleController2">
+        <ul>
+            <li ng-repeat="cust in customers | filter:filter.name | orderBy:'name'">
+                {{ cust.name }}
+            </li>
+        </ul>
+    </div>
+
+</div>
+
+<script>
+    var app = angular.module('SimpleApp', []);
+
+    app.controller('SimpleController1', ['$scope', function ($scope) {
+        $scope.persons = ['John', 'Jonny', 'Jack', 'Jane', 'Bubu', 'Gigi'];
+    }]);
+
+    app.controller('SimpleController2', ['$scope', function ($scope) {
+        $scope.customers = [{name: 'John'}, {name: 'Jonny'}, {name: 'Jack'}, {name: 'Jane'}, {name: 'Bubu'}, {name: 'Gigi'}];
+    }]);
+
+</script>
+</body>
+</html>

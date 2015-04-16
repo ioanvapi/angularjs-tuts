@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script src="lib/angular.min.js"></script>
+</head>
+
+<body ng-app="SimpleApp">
+
+<div ng-controller="SimpleController">
+    Task: <input type="text" ng-model="taskName"/>
+    <button type="button" ng-click="addTask(taskName)">Add Task</button>
+    <br/>
+    Tasks:
+    <br/>
+    <ul>
+        <li ng-repeat="task in tasks | filter:filter.name">
+            {{ task }}
+        </li>
+    </ul>
+
+    <br/>
+    Filter: <input type="text" ng-model="filter.name"/>
+</div>
+
+<script>
+    var app = angular.module('SimpleApp', []);
+
+    app.controller('SimpleController', ['$scope', 'simpleService', 'notify', function ($scope, simpleService, notify) {
+        $scope.tasks = simpleService.getTasks();
+
+        $scope.addTask = function(name) {
+            $scope.tasks = simpleService.addTask(name);
+            $scope.taskName = '';
+            notify("Task will be added !!!");
+        };
+    }]);
+
+    app.factory('simpleService', function() {
+        var tasks = ['jack', 'john', 'johnny'];
+        var service = {};
+
+        service.getTasks = function () {
+            return tasks;
+        };
+
+        service.addTask = function (name) {
+            tasks.push(name);
+            return tasks;
+        };
+
+        return service;
+    });
+
+    app.factory('notify', function() {
+        return function(msg) {
+            alert(msg);
+        };
+    })
+</script>
+</body>
+</html>

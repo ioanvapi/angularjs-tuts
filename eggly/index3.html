@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="lib/angular.min.js"></script>
+</head>
+<body>
+
+<div ng-controller="SimpleController">
+
+    SimpleService: {{ service1 }}
+
+</div>
+
+<script>
+    var app = angular.module('app', []);
+
+    app.factory('SimpleService', function() {
+        this.title = "Popa";
+        this.age = 15;
+    });
+
+    app.controller('SimpleController', ['$scope', 'SimpleService', function ($scope, SimpleService) {
+        $scope.service1 = SimpleService;
+    }]);
+
+</script>
+</body>
+</html>
