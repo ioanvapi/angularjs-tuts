@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <title>Angular Forms</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <script src="js/angular.min.js"></script>
+    <script src="app.js"></script>
+</head>
+
+<body ng-app="app" ng-controller="MainController">
+
+<div class="container">
+    <div class="col-md-6 col-md-offset-3">
+
+        <!-- PAGE TITLE -->
+        <div class="page-header">
+            <h1><span class="glyphicon glyphicon-tower"></span> Submitting Forms with Angular</h1>
+        </div>
+
+        <!-- SHOW ERROR/SUCCESS MESSAGES -->
+        <div id="messages" ng-show="message">{{ message }}</div>
+
+        <!-- FORM -->
+        <form ng-submit="processForm()">
+            <!-- NAME -->
+            <div class="form-group" ng-class="{ 'has-error' : errorName }">
+                <label>Name</label>
+                <input type="text" name="name" class="form-control" ng-model="formData.name">
+                <span class="help-block" ng-show="errorName">{{ errorName }}</span>
+            </div>
+
+            <!-- SUPER NAME -->
+            <div class="form-group" ng-class="{ 'has-error' : errorSuperhero }">
+                <label>Superhero Alias</label>
+                <input type="text" name="superheroAlias" class="form-control" ng-model="formData.superheroAlias">
+                <span class="help-block" ng-show="errorSuperhero">{{ errorSuperhero }}</span>
+            </div>
+
+            <button type="submit" class="btn btn-success btn-lg btn-block">
+                <span class="glyphicon glyphicon-flash"></span> Submit
+            </button>
+
+        </form>
+
+        <br>
+        <!-- SHOW DATA FROM INPUTS AS THEY ARE BEING TYPED -->
+        <pre>{{ formData }}</pre>
+
+    </div>
+</div>
+</body>
+</html>
